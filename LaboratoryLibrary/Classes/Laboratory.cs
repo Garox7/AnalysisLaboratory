@@ -17,7 +17,7 @@ public class Laboratory
     public void AnalysisPrenotation() 
     {
         /*
-            Tale metodo deve.
+            Tale metodo deve contenere boh
         */
     }
 }
