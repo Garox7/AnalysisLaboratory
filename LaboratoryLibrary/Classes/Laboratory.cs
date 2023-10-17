@@ -9,10 +9,10 @@ public class Laboratory
         // TODO:
     }
 
-    public (ListOfAnalysis, ListOfReagents) getListAnalysisAndReagents()
-    {
-        // TODO:
-    }
+    // public (ListOfAnalysis, ListOfReagents) getListAnalysisAndReagents()
+    // {
+    //     // TODO:
+    // }
 
     public void AnalysisPrenotation() 
     {
