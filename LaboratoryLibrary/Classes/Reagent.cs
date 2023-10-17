@@ -4,15 +4,11 @@ namespace LaboratoryLibrary.Classes;
 public class Reagent
 {
     public string Name {get;}
-    public int QuantityAvaiable {get;}
-    public int QuantityInStock {get;}
+    readonly int QuantityAvaiable = 20;
+    public int QuantityInStock = 15;
 
-    public Reagent(string reagents, int quantityAvaiable, int quantityInStock)
+    public Reagent(string reagents)
     {
         Name = reagents;
-        QuantityAvaiable = quantityAvaiable;
-        QuantityInStock = quantityInStock;
     }
-
-
 }

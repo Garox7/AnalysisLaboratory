@@ -13,6 +13,6 @@ public class Analysis
 
     public void AddReagent(Reagent reangent)
     {
-
+        RequiredReagents.Add(reangent);
     }
 }

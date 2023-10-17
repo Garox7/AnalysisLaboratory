@@ -1,9 +1,9 @@
-﻿namespace LaboratoryLibrary.Classes;
+﻿namespace LaboratoryLibrary.Classes.Laboratory;
 
 public class Laboratory
 {
-    public Dictionary<string, Analysis> Analysis {get; set;}
-    public List<Reagent> Reagents {get; set;}
+    public static List<Analysis>? Analysis {get; set;}
+    public static List<Reagent>? Reagents {get; set;}
 
     public Laboratory() {}
 
@@ -31,8 +31,8 @@ public class Laboratory
         // l'esame e aggiornare l'elenco. Nel caso dei reagenti non disponibili informa l'utente e non permette la prenotazione
     }
 
-    public Reagent GetReagentWithMostAvailability()
-    {
-        // Restituisci il reagente con la maggiore disponibilità
-    }
+    // public Reagent GetReagentWithMostAvailability()
+    // {
+    //     // Restituisci il reagente con la maggiore disponibilità
+    // }
 }
