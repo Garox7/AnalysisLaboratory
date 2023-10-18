@@ -4,11 +4,16 @@ namespace LaboratoryLibrary.Classes;
 public class Reagent
 {
     public string Name {get;}
-    readonly int QuantityAvaiable = 20;
-    public int QuantityInStock = 15;
+    private int QuantityAvaiable = 20;
+    private int QuantityInStock = 14;
 
     public Reagent(string reagents)
     {
         Name = reagents;
+    }
+
+    public override string ToString()
+    {
+        return "";
     }
 }

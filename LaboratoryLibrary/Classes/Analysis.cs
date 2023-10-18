@@ -3,16 +3,30 @@ namespace LaboratoryLibrary.Classes;
 public class Analysis
 {
     public string Name {get;}
-    public List<Reagent> RequiredReagents {get;}
+    private List<string> RequiredReagents {get; }
 
-    public Analysis(string name)
+    public Analysis(string name, params string[] reagentName)
     {
         Name = name;
-        RequiredReagents = new List<Reagent>();
+        RequiredReagents = new List<string>();
+        foreach (var reagent in reagentName)
+        {
+            AddReagent(reagent);
+        }
     }
 
-    public void AddReagent(Reagent reangent)
+    private void AddReagent(string reagentName)
     {
-        RequiredReagents.Add(reangent);
+        if (Laboratory.Reagents.Any(reagent => reagent.Name == reagentName))
+        {
+            RequiredReagents.Add(reagentName);
+        } else {
+            Console.WriteLine($"In {Name} non è stato aggiunto {reagentName} perchè non è presente in magazzino.");
+        }
+    }
+
+    public override string ToString()
+    {
+        return $"{Name}\n";
     }
 }

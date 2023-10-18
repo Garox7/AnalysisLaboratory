@@ -1,9 +1,9 @@
-﻿namespace LaboratoryLibrary.Classes.Laboratory;
+﻿namespace LaboratoryLibrary.Classes;
 
 public class Laboratory
 {
-    public static List<Analysis>? Analysis {get; set;}
-    public static List<Reagent>? Reagents {get; set;}
+    public static List<Analysis> Analysis = new();
+    public static List<Reagent> Reagents = new();
 
     public Laboratory() {}
 
@@ -29,7 +29,10 @@ public class Laboratory
     {
         // Tale funzione deve controllare la disponibilità dei reagenti richiesti per effettuare
         // l'esame e aggiornare l'elenco. Nel caso dei reagenti non disponibili informa l'utente e non permette la prenotazione
+        
     }
+
+    // confronto reagenti analisi con reagenti in magazzino 
 
     // public Reagent GetReagentWithMostAvailability()
     // {
