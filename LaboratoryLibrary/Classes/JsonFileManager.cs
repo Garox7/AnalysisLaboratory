@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
-using System.io
+using System.IO;
 namespace LaboratoryLibrary.Classes;
 // dotnet add PROGETTO DOVE VA USATO reference PROGETTO DA USARE
 public class JsonFileManager
