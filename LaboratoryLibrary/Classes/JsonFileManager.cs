@@ -1,12 +1,8 @@
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
-using LaboratoryLibrary;
-
-
-// dotnet add PROGETTO DOVE VA USATO reference PROGETTO DA USARE
-
+using System.io
 namespace LaboratoryLibrary.Classes;
-
+// dotnet add PROGETTO DOVE VA USATO reference PROGETTO DA USARE
 public class JsonFileManager
 {
     // definiamo un delegate per la lettura di un file JSON
@@ -20,6 +16,7 @@ public class JsonFileManager
     {
         if(File.Exists(filePath))
         {
+            File.SetAttributes(filePath, File.GetAttributes(filePath) | FileAttributes.ReadOnly);
             string jsonData = File.ReadAllText(filePath);
             return jsonReader(jsonData);
         }
