@@ -1,11 +1,16 @@
-﻿namespace LaboratoryLibrary.Classes;
+﻿using Newtonsoft.Json;
+
+namespace LaboratoryLibrary.Classes;
 
 public class Laboratory
 {
     public static List<Analysis> Analysis = new();
+
+    [JsonProperty]
     public static List<Reagent> Reagents = new();
 
-    public Laboratory() {}
+    public Laboratory() {
+    }
 
     public void LoadAnalysesFromFile(string filePath)
     {
@@ -18,6 +23,15 @@ public class Laboratory
         // Implementa il caricamento dei reagenti dal file MAGAZZINO.DAT
         // Aggiorna le quantità disponibili dei reagenti esistenti e aggiungi nuovi reagenti se necessario
     }
+
+    // public static bool checkIfReagentIsAvaiable(string reagentName)
+    // {
+    //     if (Reagents.Any(reagent => reagent.Name == reagentName))
+    //     {
+    //         return true;
+    //     } 
+    //     return false;
+    // }
 
     public void getListAnalysisAndReagents()
     {

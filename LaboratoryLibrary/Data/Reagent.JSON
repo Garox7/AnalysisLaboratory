@@ -43,5 +43,10 @@
     "QuantityAvaiable": 20,
     "QuantityInStock": 14,
     "Name": "reagente9"
+  },
+  {
+    "QuantityAvaiable": 20,
+    "QuantityInStock": 14,
+    "Name": "reagente10"
   }
 ]

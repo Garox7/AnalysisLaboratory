@@ -1,29 +1,35 @@
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 namespace LaboratoryLibrary.Classes;
-// dotnet add PROGETTO DOVE VA USATO reference PROGETTO DA USARE
 
-// definiamo un delegate per la lettura di un file JSON
-public delegate T JsonReader<T>(string filePath);
-
-// definiamo un delegate per la scrittuta di un file JSON
 public delegate string JsonWriter<T>(T data, Formatting indent);
 
-// Metodo per generivo per leggere un file JSON
 public class JsonFileManager
 {
-    public T ReadJsonFile<T>(string filePath, JsonReader<T> jsonReader)
+    string filePathReagents = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Reagent.JSON";
+    string filePathAnalysis = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Analysis.JSON";
+
+
+    public void ReadAnalysisJsonFile()
     {
-        if(File.Exists(filePath))
+        using (StreamReader reader = new StreamReader(filePathReagents))
         {
-            string jsonData = File.ReadAllText(filePath);
-            return jsonReader(jsonData);
+            Console.WriteLine("Sto caricando i reagenti");
+            string json = reader.ReadToEnd();
+            Laboratory.Reagents = new List<Reagent>(JsonConvert.DeserializeObject<List<Reagent>>(json));
         }
-        else
+
+        using (StreamReader reader = new StreamReader(filePathAnalysis))
         {
-            throw new FileNotFoundException($"File not foud: {filePath}");
+            Console.WriteLine("Sto caricando le analisi");
+            string json = reader.ReadToEnd();
+            Laboratory.Analysis = JsonConvert.DeserializeObject<List<Analysis>>(json);
         }
     }
-    //Metodo per scrivere un file JSON
+
+    public void ReadReagentJsonFile() {
+    }
+    
     public void WriteJsonFile<T>(string filePath, T data, JsonWriter<T> jsonWriter)
     {
        string jsonData = jsonWriter(data, Formatting.Indented);

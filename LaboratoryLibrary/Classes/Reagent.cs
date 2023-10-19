@@ -1,19 +1,24 @@
+using Newtonsoft.Json;
+
 namespace LaboratoryLibrary.Classes;
 
 
 public class Reagent
 {
     public string Name {get;}
-    private int QuantityAvaiable = 20;
-    private int QuantityInStock = 14;
+    public int QuantityAvaiable = 20;
+    public int QuantityInStock = 14;
 
-    public Reagent(string reagents)
+    public Reagent(string name)
     {
-        Name = reagents;
+        Name = name;
     }
 
     public override string ToString()
     {
-        return "";
+        return 
+            $"Nome: {Name}\n" + 
+            $"Quantità diponibile: {QuantityAvaiable}\n" +
+            $"Qantità in magazzino: {QuantityInStock}\n";
     }
 }

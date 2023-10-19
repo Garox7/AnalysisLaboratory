@@ -1,26 +1,51 @@
 ﻿using System;
-using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using LaboratoryLibrary.Classes;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Program program = new();
-        Laboratory lab = new();
         JsonFileManager jsonFile = new();
         // program.Inizialization();
 
-        string filePathAnalysis = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Analysis.JSON";
-        string filePathReagents = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Reagent.JSON";
 
-        Laboratory.Analysis = jsonFile.ReadJsonFile(filePathAnalysis, JsonConvert.DeserializeObject<List<Analysis>>);
-        
-        foreach (var analysis in Laboratory.Analysis)
+        jsonFile.ReadAnalysisJsonFile();
+        // foreach (var reagent in Laboratory.Reagents)
+        // {
+        //     Console.WriteLine(reagent.ToString());
+        // }
+
+        // foreach (var analysis in Laboratory.Analysis)
+        // {
+        //     Console.WriteLine(analysis.ToString());
+        // }
+
+        do
         {
-            Console.WriteLine(analysis.ToString());
-        }
+            Console.WriteLine("Welcome To Laboratory");
+            Console.WriteLine("1. Login as a Admin");
+            Console.WriteLine("2. Continue as a Guest");
+            Console.WriteLine("3. Exit to Program");
+
+            string choise = Console.ReadLine().Trim();
+
+            switch (choise)
+            {
+                case "1":
+                    AdminInterface.Admin();
+                    break;
+                case "2":
+                    UserInterface.User();
+                    break;
+                case "3":
+                    return;
+                default:
+                    Console.WriteLine("Invalid Choise");
+                    return;
+            }
+
+        } while (true);
     }
 
     public void Inizialization()
@@ -47,10 +72,14 @@ class Program
         Laboratory.Reagents.Add(reagent9);
 
         // ANALYSIS
-        Analysis analysis1 = new("analisi_1", "reagente9", "reagente7", "reagente6") ;
-        Analysis analysis2 = new("analisi_2", "reagente5", "reagente1");
-        Analysis analysis3 = new("analisi_3", "reagente6", "reagente5", "reagente2");
-        Analysis analysis4 = new("analisi_4", "reagente3", "reagente1");
+        var array1 = new List<string>{"reagente9", "reagente7", "reagente6"};
+        var array2 = new List<string>{"reagente4", "reagente7", "reagente6"};
+        var array3 = new List<string>{"reagente3", "reagente2", "reagente1"};
+        var array4 = new List<string>{"reagente9", "reagente8", "reagente5"};
+        Analysis analysis1 = new("analisi_1", array1) ;
+        Analysis analysis2 = new("analisi_2", array2);
+        Analysis analysis3 = new("analisi_3", array3);
+        Analysis analysis4 = new("analisi_4", array4);
 
         Laboratory.Analysis.Add(analysis1);
         Laboratory.Analysis.Add(analysis2);

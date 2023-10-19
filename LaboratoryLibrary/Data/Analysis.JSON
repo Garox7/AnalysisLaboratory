@@ -10,23 +10,25 @@
   {
     "Name": "analisi_2",
     "RequiredReagents": [
-      "reagente5",
-      "reagente1"
+      "reagente4",
+      "reagente7",
+      "reagente6"
     ]
   },
   {
     "Name": "analisi_3",
     "RequiredReagents": [
-      "reagente6",
-      "reagente5",
-      "reagente2"
+      "reagente3",
+      "reagente2",
+      "reagente1"
     ]
   },
   {
     "Name": "analisi_4",
     "RequiredReagents": [
-      "reagente3",
-      "reagente1"
+      "reagente9",
+      "reagente8",
+      "reagente5"
     ]
   }
 ]
