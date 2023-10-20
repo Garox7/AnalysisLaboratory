@@ -6,8 +6,8 @@ public delegate string JsonWriter<T>(T data, Formatting indent);
 
 public class JsonFileManager
 {
-    string filePathReagents = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Reagent.JSON";
-    string filePathAnalysis = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Analysis.JSON";
+    string filePathReagents = "./Reagent.JSON";
+    string filePathAnalysis = ".Analysis.JSON";
 
 
     public void ReadAnalysisJsonFile()
