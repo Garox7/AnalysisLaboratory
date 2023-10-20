@@ -2,17 +2,20 @@ using Newtonsoft.Json;
 
 namespace LaboratoryLibrary.Classes;
 
-
 public class Reagent
 {
     public string Name {get;}
+
+    [JsonProperty]
     public int QuantityAvaiable {get; private set;}
+
+    [JsonProperty]
     public int QuantityInStock {get; private set;}
 
     public Reagent(string name)
     {
         Name = name;
-        QuantityAvaiable = 20;
+        QuantityAvaiable = 12;
         QuantityInStock = 20;
     }
 
@@ -33,7 +36,7 @@ public class Reagent
     {
         return 
             $"---- {Name.ToUpper()} ----\n" + 
-            $"Quantità diponibile: {QuantityAvaiable}\n" +
-            $"Qantità in magazzino: {QuantityInStock}\n";
+            $"Quantity available: {QuantityAvaiable}\n" +
+            $"Quantity in stock: {QuantityInStock}\n";
     }
 }

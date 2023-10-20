@@ -1,8 +1,12 @@
+using Newtonsoft.Json;
+
 namespace LaboratoryLibrary.Classes;
 
 public class Analysis
 {
     public string Name {get;}
+
+    [JsonProperty]
     private List<string> RequiredReagents = new();
 
     public Analysis(string name)
@@ -43,7 +47,7 @@ public class Analysis
         }
 
         return 
-            $"{Name}\n" +
+            $"---- {Name.ToUpper()} ----\n"  +
             $"{reagentString}";
     }
 }

@@ -17,11 +17,14 @@ public class Laboratory
         this._reagents = reagents;
     }
 
+    public (List<Analysis>? analysesList, List<Reagent>? reagentsList) GetAnalysesAndReagent() {
+        return (Analysis, this._reagents);
+    }
+
     public void AnalysisPrenotation() 
     {
         // Tale funzione deve controllare la disponibilità dei reagenti richiesti per effettuare
         // l'esame e aggiornare l'elenco. Nel caso dei reagenti non disponibili informa l'utente e non permette la prenotazione
-        
     }
 
     public List<Reagent> GetReagentWithMostAvailability()

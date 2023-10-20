@@ -15,7 +15,7 @@ public class JsonFileManager
 
     public async void ReadAnalysesJsonFile()
     {
-        using (StreamReader reader = new StreamReader(filePathReagents))
+        using (StreamReader reader = new StreamReader(filePathAnalysis))
         {
             string json = await reader.ReadToEndAsync();
             var analysis = JsonConvert.DeserializeObject<List<Analysis>>(json);
@@ -25,7 +25,7 @@ public class JsonFileManager
 
     public async void ReadReagentJsonFile()
     {
-        using (StreamReader reader = new StreamReader(filePathAnalysis))
+        using (StreamReader reader = new StreamReader(filePathReagents))
         {
             string json = await reader.ReadToEndAsync();
             var reagents = JsonConvert.DeserializeObject<List<Reagent>>(json);

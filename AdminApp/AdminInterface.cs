@@ -3,14 +3,17 @@ using LaboratoryLibrary.Classes;
 public class AdminInterface
 {
     private Laboratory Laboratory;
+    private JsonFileManager JsonFile;
 
     public AdminInterface() {
         Laboratory = new Laboratory();
+        JsonFile = new JsonFileManager(Laboratory);
     }
     
     public void Admin()
     {
-        
+        JsonFile.ReadReagentJsonFile();
+        JsonFile.ReadAnalysesJsonFile();
 
         do
         {
@@ -53,7 +56,27 @@ public class AdminInterface
 
     private void ShowAnalysesAndWarehouse()
     {
-        Console.WriteLine("Hi Admin");
+        try
+        {
+            var result = Laboratory.GetAnalysesAndReagent();
+
+            Console.WriteLine("\n======== ANALYSES LIST ========");
+            foreach (var analysis in result.analysesList)
+            { 
+                Console.WriteLine(analysis.ToString());
+            }
+
+            Console.WriteLine("\n======== REAGENT LIST ========");
+            foreach (var reagent in result.reagentsList)
+            {
+                Console.WriteLine(reagent.ToString());
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+        }
+
     }
 
     private void BookAnalyses()
