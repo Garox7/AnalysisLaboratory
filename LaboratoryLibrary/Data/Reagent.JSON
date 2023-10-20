@@ -1,52 +1,52 @@
 [
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 14,
+    "QuantityInStock": 20,
     "Name": "reagente1"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 11,
+    "QuantityInStock": 20,
     "Name": "reagente2"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 8,
+    "QuantityInStock": 20,
     "Name": "reagente3"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 3,
+    "QuantityInStock": 20,
     "Name": "reagente4"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 19,
+    "QuantityInStock": 20,
     "Name": "reagente5"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 17,
+    "QuantityInStock": 20,
     "Name": "reagente6"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 5,
+    "QuantityInStock": 20,
     "Name": "reagente7"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 3,
+    "QuantityInStock": 20,
     "Name": "reagente8"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 1,
+    "QuantityInStock": 20,
     "Name": "reagente9"
   },
   {
-    "QuantityAvaiable": 20,
-    "QuantityInStock": 14,
+    "QuantityAvaiable": 13,
+    "QuantityInStock": 20,
     "Name": "reagente10"
   }
 ]

@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 namespace LaboratoryLibrary.Classes;
 
@@ -6,28 +5,32 @@ public delegate string JsonWriter<T>(T data, Formatting indent);
 
 public class JsonFileManager
 {
-    string filePathReagents = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Reagent.JSON";
-    string filePathAnalysis = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Analysis.JSON";
+    private Laboratory _lab;
+    private readonly string filePathReagents = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Reagent.JSON";
+    private readonly string filePathAnalysis = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Analysis.JSON";
 
+    public JsonFileManager(Laboratory lab) {
+        _lab = lab;
+    }
 
-    public void ReadAnalysisJsonFile()
+    public async void ReadAnalysesJsonFile()
     {
         using (StreamReader reader = new StreamReader(filePathReagents))
         {
-            Console.WriteLine("Sto caricando i reagenti");
-            string json = reader.ReadToEnd();
-            Laboratory.Reagents = new List<Reagent>(JsonConvert.DeserializeObject<List<Reagent>>(json));
-        }
-
-        using (StreamReader reader = new StreamReader(filePathAnalysis))
-        {
-            Console.WriteLine("Sto caricando le analisi");
-            string json = reader.ReadToEnd();
-            Laboratory.Analysis = JsonConvert.DeserializeObject<List<Analysis>>(json);
+            string json = await reader.ReadToEndAsync();
+            var analysis = JsonConvert.DeserializeObject<List<Analysis>>(json);
+            _lab.SetAnalyses(analysis);
         }
     }
 
-    public void ReadReagentJsonFile() {
+    public async void ReadReagentJsonFile()
+    {
+        using (StreamReader reader = new StreamReader(filePathAnalysis))
+        {
+            string json = await reader.ReadToEndAsync();
+            var reagents = JsonConvert.DeserializeObject<List<Reagent>>(json);
+            _lab.SetReagents(reagents);
+        }
     }
     
     public void WriteJsonFile<T>(string filePath, T data, JsonWriter<T> jsonWriter)

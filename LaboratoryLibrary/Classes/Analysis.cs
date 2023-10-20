@@ -3,32 +3,35 @@ namespace LaboratoryLibrary.Classes;
 public class Analysis
 {
     public string Name {get;}
-    public List<string> RequiredReagents {get; }
+    private List<string> RequiredReagents = new();
 
-    public Analysis(string name, List<string> reagentName)
+    public Analysis(string name)
     {
         Name = name;
-        RequiredReagents = new List<string>();
-        
-        if (reagentName != null)
-        {
-            foreach (string reagent in reagentName)
-            {
-                AddReagent(reagent);
-            }
-        }
-        else
-        {
-            Console.WriteLine($"In {Name}, la lista di reagenti è nulla.");
-        }
     }
 
-    private void AddReagent(string reagentName)
+    public bool AddReagent(List<Reagent> reagents)
     {
-        if (Laboratory.Reagents.Any(reagent => reagent.Name == reagentName))
+        bool reagentExist = true;
+
+        foreach (var reagentName in RequiredReagents.ToList())
         {
-            RequiredReagents.Add(reagentName);
+            Reagent? reagent = reagents
+                .FirstOrDefault(reagent => reagent.Name == reagentName && reagent.QuantityAvaiable >= 1);
+
+            if (reagent != null)
+            {
+                RequiredReagents.Add(reagentName);
+                reagent.DecreaseAvailableQuantity();
+            } 
+            else
+            {
+                RequiredReagents.Remove(reagentName);
+                reagentExist = false;
+            }
         }
+
+        return reagentExist;
     }
 
     public override string ToString()

@@ -4,39 +4,17 @@ namespace LaboratoryLibrary.Classes;
 
 public class Laboratory
 {
-    public static List<Analysis> Analysis = new();
+    public List<Analysis>? Analysis {get; private set;}
+    private List<Reagent>? _reagents;
 
-    [JsonProperty]
-    public static List<Reagent> Reagents = new();
-
-    public Laboratory() {
+    public void SetAnalyses(List<Analysis> analyses)
+    {
+        this.Analysis = analyses;
     }
 
-    public void LoadAnalysesFromFile(string filePath)
+    public void SetReagents(List<Reagent> reagents)
     {
-        // Implementa il caricamento delle analisi dal file ANALISI.DAT
-        // Aggiungi analisi e reagenti alla lista analyses e reagents
-    }
-
-    public void LoadReagentsFromFile(string filePath)
-    {
-        // Implementa il caricamento dei reagenti dal file MAGAZZINO.DAT
-        // Aggiorna le quantità disponibili dei reagenti esistenti e aggiungi nuovi reagenti se necessario
-    }
-
-    // public static bool checkIfReagentIsAvaiable(string reagentName)
-    // {
-    //     if (Reagents.Any(reagent => reagent.Name == reagentName))
-    //     {
-    //         return true;
-    //     } 
-    //     return false;
-    // }
-
-    public void getListAnalysisAndReagents()
-    {
-        // Ottengo la lista delle analisi e dei loro reagenti richiesti.
-        // oppure stampo la lisa delle analisi e dei reagenti separatamente?
+        this._reagents = reagents;
     }
 
     public void AnalysisPrenotation() 
@@ -46,10 +24,10 @@ public class Laboratory
         
     }
 
-    // confronto reagenti analisi con reagenti in magazzino 
-
-    // public Reagent GetReagentWithMostAvailability()
-    // {
-    //     // Restituisci il reagente con la maggiore disponibilità
-    // }
+    public List<Reagent> GetReagentWithMostAvailability()
+    {
+        
+        var reagents = this._reagents.OrderByDescending(reagent => reagent.QuantityAvaiable).ToList();
+        return reagents;
+    }
 }
