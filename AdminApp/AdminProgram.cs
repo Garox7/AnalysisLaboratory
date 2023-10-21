@@ -6,8 +6,8 @@ class Program
 {
     static void Main()
     {
-        Laboratory lab = new();
-        JsonFileManager jsonFile = new(lab);
+        // Laboratory lab = new();
+        // JsonFileManager jsonFile = new(lab);
         
         AdminInterface adminInterface = new();
         adminInterface.Admin();
