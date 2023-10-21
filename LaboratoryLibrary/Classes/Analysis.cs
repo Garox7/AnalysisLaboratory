@@ -5,7 +5,7 @@ public class Analysis
     public string Name {get;}
     public List<string> RequiredReagents {get; }
 
-    public Analysis(string name, List<string> reagentName)
+    public Analysis(string name)
     {
         Name = name;
         RequiredReagents = new List<string>();
