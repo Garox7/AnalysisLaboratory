@@ -1,4 +1,5 @@
 using LaboratoryLibrary.Classes;
+using LaboratoryLibrary.Exceptions;
 
 public class AdminInterface
 {
@@ -21,7 +22,8 @@ public class AdminInterface
             Console.WriteLine("1. Shows analyses and warehouse availability");
             Console.WriteLine("2. Book an Analysis");
             Console.WriteLine("3. Searches for the reagent with greater availability");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("4. Create Prenotation");
+            Console.WriteLine("5. Exit");
 
             string choise = Console.ReadLine().Trim();
 
@@ -39,6 +41,9 @@ public class AdminInterface
                         SearchForReagentWithGreaterAvailability();
                         break;
                     case "4":
+                        CreatePrenotation();
+                        break;
+                    case "5":
                         return;
                     default:
                         Console.WriteLine("Invalid choise");
@@ -98,6 +103,48 @@ public class AdminInterface
         catch (Exception e)
         {
             Console.WriteLine("An error occurred: " + e.Message);
+        }
+    }
+
+    private void CreatePrenotation()
+    {
+        string userIdentifier;
+        int selectedAnalysis;
+        
+        Console.Write("Please enter a user identifier: ");
+        // Effettuare controllo 
+        userIdentifier = Console.ReadLine().Trim();
+        
+        for (int i = 0; i < Laboratory.Analysis.Count; i++)
+        {
+            Console.WriteLine(
+                $"{i + 1}. " + Laboratory.Analysis[i].ToString()
+            );
+        }
+
+        Console.Write("\nInserisci l'analisi da prenotare: ");
+
+        if (int.TryParse(Console.ReadLine(), out selectedAnalysis)) {
+
+            try
+            {
+                if (Laboratory.CreatePrenotation(userIdentifier, Laboratory.Analysis[selectedAnalysis - 1]))
+                {
+                    Console.WriteLine($"\n{Laboratory.Analysis[selectedAnalysis - 1].Name.ToUpper()} Booking made successfully");
+                }
+                else
+                {
+                    Console.WriteLine("The reservation was not successful");
+                }
+            }
+            catch (ReagentUnavailableException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid analysis selection. Please enter a valid analysis number.");
         }
     }
 }

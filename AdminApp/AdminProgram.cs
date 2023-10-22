@@ -60,3 +60,15 @@ class Program
     //     jsonFile.WriteJsonFile(filePathReagents, Laboratory.Reagents, JsonConvert.SerializeObject);
     // }
 }
+
+
+/*
+TODO:
+1. Classe prenotazione, V
+2. Creare Dictonary,
+3. Provare a serializzare e deserializzare i dati,
+4. Effettuare prenotazione sia lato Admin che User,
+5. Lato Admin ottenere per ogni Analisi gli utenti prenotati,
+6. Lato User ottenere per lo User corrente lo storico degli esami effettuati.
+7. 
+*/

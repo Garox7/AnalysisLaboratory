@@ -1,3 +1,4 @@
+using LaboratoryLibrary.Exceptions;
 using Newtonsoft.Json;
 
 namespace LaboratoryLibrary.Classes;
@@ -7,7 +8,7 @@ public class Reagent
     public string Name {get;}
 
     [JsonProperty]
-    public int QuantityAvaiable {get; private set;}
+    public int QuantityAvailable {get; private set;}
 
     [JsonProperty]
     public int QuantityInStock {get; private set;}
@@ -15,28 +16,34 @@ public class Reagent
     public Reagent(string name)
     {
         Name = name;
-        QuantityAvaiable = 12;
-        QuantityInStock = 20;
     }
 
+    // private bool RequestNewAvailableQuantity()
+    // {
+        
+    // }
+
+    // questo metodo si occupa di decrementare le quantità disponibili.
+    // Se queste non sono disponibii allora richiene una nuova disponibilià dal magazzino.
     public bool DecreaseAvailableQuantity()
     {
-        bool isAvailable = true;
-
-        if (QuantityAvaiable > 0)
+        if (QuantityAvailable > 0)
         {
-            QuantityAvaiable--;
-        }
-        else isAvailable = false;
+            QuantityAvailable--;
+            return true;
 
-        return isAvailable;
+        }
+        else 
+        {
+            throw new ReagentUnavailableException("Insufficient quantity available");
+        }
     }
 
     public override string ToString()
     {
         return 
             $"---- {Name.ToUpper()} ----\n" + 
-            $"Quantity available: {QuantityAvaiable}\n" +
+            $"Quantity available: {QuantityAvailable}\n" +
             $"Quantity in stock: {QuantityInStock}\n";
     }
 }

@@ -1,14 +1,30 @@
 using LaboratoryLibrary.Classes;
 
 public class Prenotation {
-    private User _username;
+    private string _username;
     private Analysis _analyses;
-    private bool _confirmed;
+    public bool confirmed {get; private set;}
 
-    public Prenotation (User user, Analysis analysis)
+    public Prenotation (string username, Analysis analysis)
     {
-        _username = user;
+        _username = username;
         _analyses = analysis;
-        _confirmed = false;
+    }
+
+    public bool ConfimPrenotation()
+    {
+        if (!confirmed)
+        {
+            confirmed = true;
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public override string ToString()
+    {
+        return "";
     }
 }
