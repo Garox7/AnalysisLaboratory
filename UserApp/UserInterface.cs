@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Dynamic;
 using LaboratoryLibrary.Classes;
+using LaboratoryLibrary.Classes.Laboratory;
 // si deve fare la reference per provarlo.
 public class UserInterface
 {
