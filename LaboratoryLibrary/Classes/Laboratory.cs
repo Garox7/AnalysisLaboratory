@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-
-namespace LaboratoryLibrary.Classes;
+﻿namespace LaboratoryLibrary.Classes;
 
 public class Laboratory
 {
     public List<Analysis>? Analysis {get; private set;}
     private List<Reagent>? _reagents;
+    private Dictionary<string, List<Analysis>> prenotations;
 
     public void SetAnalyses(List<Analysis> analyses)
     {
@@ -18,7 +17,7 @@ public class Laboratory
     }
 
     public (List<Analysis>? analysesList, List<Reagent>? reagentsList) GetAnalysesAndReagent() {
-        return (Analysis, this._reagents);
+        return (Analysis, _reagents);
     }
 
     public void AnalysisPrenotation() 
