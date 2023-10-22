@@ -1,7 +1,7 @@
 [
   {
     "Name": "emocromo",
-    "RequiredReagents": [
+    "_requiredReagents": [
       "reagente9",
       "reagente7",
       "reagente6"
@@ -9,7 +9,7 @@
   },
   {
     "Name": "urinalysis",
-    "RequiredReagents": [
+    "_requiredReagents": [
       "reagente4",
       "reagente7",
       "reagente6"
@@ -17,7 +17,7 @@
   },
   {
     "Name": "glycemia",
-    "RequiredReagents": [
+    "_requiredReagents": [
       "reagente3",
       "reagente2",
       "reagente1"
@@ -25,7 +25,7 @@
   },
   {
     "Name": "cholesterol",
-    "RequiredReagents": [
+    "_requiredReagents": [
       "reagente9",
       "reagente8",
       "reagente5"

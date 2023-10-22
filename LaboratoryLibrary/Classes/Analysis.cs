@@ -44,14 +44,14 @@ public class Analysis
 
     public override string ToString()
     {
-        string reagentString = string.Empty;
+        string reagentList = "";
         foreach (var reagent in _requiredReagents)
         {
-            reagentString += $"{reagent}\n";
+            reagentList += $"{reagent}\n";
         }
 
         return 
             $"---- {Name.ToUpper()} ----\n"  +
-            $"{reagentString}";
+            $"{reagentList}";
     }
 }

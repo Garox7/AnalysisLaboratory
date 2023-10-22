@@ -1,28 +1,32 @@
 using LaboratoryLibrary.Classes;
 using LaboratoryLibrary.Exceptions;
+using Newtonsoft.Json;
 
 public class AdminInterface
 {
     private Laboratory Laboratory;
     private JsonFileManager JsonFile;
 
-    public AdminInterface() {
+    public AdminInterface()
+    {
         Laboratory = new Laboratory();
         JsonFile = new JsonFileManager(Laboratory);
     }
-    
+
     public void Admin()
     {
         JsonFile.ReadReagentJsonFile();
         JsonFile.ReadAnalysesJsonFile();
+        JsonFile.ReadPrenotationJsonFile();
+
+        Console.WriteLine("Welcome Admin");
 
         do
         {
-            Console.WriteLine("Welcome Admin");
             Console.WriteLine("1. Shows analyses and warehouse availability");
-            Console.WriteLine("2. Book an Analysis");
-            Console.WriteLine("3. Searches for the reagent with greater availability");
-            Console.WriteLine("4. Create Prenotation");
+            Console.WriteLine("2. Searches for the reagent with greater availability");
+            Console.WriteLine("3. Create Prenotation");
+            Console.WriteLine("4. Get History of prenotation from username");
             Console.WriteLine("5. Exit");
 
             string choise = Console.ReadLine().Trim();
@@ -35,13 +39,13 @@ public class AdminInterface
                         ShowAnalysesAndWarehouse();
                         break;
                     case "2":
-                        BookAnalyses();
-                        break;
-                    case "3":
                         SearchForReagentWithGreaterAvailability();
                         break;
-                    case "4":
+                    case "3":
                         CreatePrenotation();
+                        break;
+                    case "4":
+                        GetHistoryFromUser();
                         break;
                     case "5":
                         return;
@@ -54,8 +58,6 @@ public class AdminInterface
             {
                 Console.WriteLine("An error occurred: " + e.Message);
             }
-
-
         } while (true);
     }
 
@@ -67,7 +69,7 @@ public class AdminInterface
 
             Console.WriteLine("\n======== ANALYSES LIST ========");
             foreach (var analysis in result.analysesList)
-            { 
+            {
                 Console.WriteLine(analysis.ToString());
             }
 
@@ -84,17 +86,12 @@ public class AdminInterface
 
     }
 
-    private void BookAnalyses()
-    {
-        Console.WriteLine("Book Analyses");
-    }
-
     private void SearchForReagentWithGreaterAvailability()
     {
-        try 
+        try
         {
             var reagents = Laboratory.GetReagentWithMostAvailability();
-            
+
             foreach (var reagent in reagents)
             {
                 Console.WriteLine(reagent.ToString());
@@ -110,11 +107,11 @@ public class AdminInterface
     {
         string userIdentifier;
         int selectedAnalysis;
-        
+
         Console.Write("Please enter a user identifier: ");
         // Effettuare controllo 
         userIdentifier = Console.ReadLine().Trim();
-        
+
         for (int i = 0; i < Laboratory.Analysis.Count; i++)
         {
             Console.WriteLine(
@@ -124,17 +121,19 @@ public class AdminInterface
 
         Console.Write("\nInserisci l'analisi da prenotare: ");
 
-        if (int.TryParse(Console.ReadLine(), out selectedAnalysis)) {
+        if (int.TryParse(Console.ReadLine(), out selectedAnalysis))
+        {
 
             try
             {
                 if (Laboratory.CreatePrenotation(userIdentifier, Laboratory.Analysis[selectedAnalysis - 1]))
                 {
-                    Console.WriteLine($"\n{Laboratory.Analysis[selectedAnalysis - 1].Name.ToUpper()} Booking made successfully");
+                    Console.WriteLine($"\n{Laboratory.Analysis[selectedAnalysis - 1].Name.ToUpper()} Booking made successfully\n");
+                    JsonFile.WriteJsonFile(JsonFile.filePathPrenotations, Laboratory._prenotations, JsonConvert.SerializeObject);
                 }
                 else
                 {
-                    Console.WriteLine("The reservation was not successful");
+                    Console.WriteLine("The reservation was not successful\n");
                 }
             }
             catch (ReagentUnavailableException e)
@@ -144,7 +143,22 @@ public class AdminInterface
         }
         else
         {
-            Console.WriteLine("Invalid analysis selection. Please enter a valid analysis number.");
+            Console.WriteLine("Invalid analysis selection. Please enter a valid analysis number.\n");
+        }
+    }
+
+    private void GetHistoryFromUser()
+    {
+        string userIdentifier;
+
+        Console.Write("Please enter a user identifier: ");
+        userIdentifier = Console.ReadLine().Trim();
+
+        var userHistory = Laboratory.GetUserHistory(userIdentifier);
+
+        foreach (var prenotation in userHistory)
+        {
+            Console.WriteLine(prenotation.ToString());
         }
     }
 }

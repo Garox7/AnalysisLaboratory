@@ -8,6 +8,7 @@ public class JsonFileManager
     private Laboratory _lab;
     private readonly string filePathReagents = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Reagent.JSON";
     private readonly string filePathAnalysis = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Analysis.JSON";
+    public readonly string filePathPrenotations = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Prenotations.JSON";
 
     public JsonFileManager(Laboratory lab) {
         _lab = lab;
@@ -30,6 +31,16 @@ public class JsonFileManager
             string json = await reader.ReadToEndAsync();
             var reagents = JsonConvert.DeserializeObject<List<Reagent>>(json);
             _lab.SetReagents(reagents);
+        }
+    }
+
+     public async void ReadPrenotationJsonFile()
+    {
+        using (StreamReader reader = new StreamReader(filePathPrenotations))
+        {
+            string json = await reader.ReadToEndAsync();
+            var prenotations = JsonConvert.DeserializeObject<Dictionary<string, List<Prenotation>>>(json);
+            _lab.SetPrenotations(prenotations);
         }
     }
     

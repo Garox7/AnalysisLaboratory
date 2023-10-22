@@ -4,9 +4,9 @@ namespace LaboratoryLibrary.Classes;
 
 public class Laboratory
 {
-    public List<Analysis>? Analysis {get; private set;}
+    public List<Analysis>? Analysis { get; private set; }
     private List<Reagent>? _reagents;
-    private Dictionary<string, List<Prenotation>>? prenotations = new Dictionary<string, List<Prenotation>>();
+    public Dictionary<string, List<Prenotation>>? _prenotations { get; private set; } = new Dictionary<string, List<Prenotation>>();
 
     public void SetAnalyses(in List<Analysis> analyses)
     {
@@ -18,25 +18,31 @@ public class Laboratory
         _reagents = reagents;
     }
 
-    public (List<Analysis>? analysesList, List<Reagent>? reagentsList) GetAnalysesAndReagent() {
+    public void SetPrenotations(in Dictionary<string, List<Prenotation>> prenotations)
+    {
+        _prenotations = prenotations;
+    }
+
+    public (List<Analysis>? analysesList, List<Reagent>? reagentsList) GetAnalysesAndReagent()
+    {
         return (Analysis, _reagents);
     }
 
     /* Effettua la prenotazione sia lato Admin che Lato User:
     ** Torna vero se a sua volta i reagenti richiesti per effettuare l'analisi disponibili
     ** tramite "DecreaseReagentsQuantityForAnalysis".
-    */   
-    public bool CreatePrenotation(string username, in Analysis analysis) 
+    */
+    public bool CreatePrenotation(string username, in Analysis analysis)
     {
-        if (!prenotations.ContainsKey(username))
+        if (!_prenotations.ContainsKey(username))
         {
-            prenotations[username] = new List<Prenotation>();
+            _prenotations[username] = new List<Prenotation>();
         }
 
-        if (DecreaseReagentsQuantityForAnalysis(analysis)) 
+        if (DecreaseReagentsQuantityForAnalysis(analysis))
         {
-            var prenotation = new Prenotation(username, analysis);
-            prenotations[username].Add(prenotation);
+            var prenotation = new Prenotation(analysis);
+            _prenotations[username].Add(prenotation);
             return true;
         }
         else throw new ReagentUnavailableException("The required reagents are not available for analysis.");
@@ -54,18 +60,25 @@ public class Laboratory
         {
             foreach (var reagent in _reagents.FindAll(r => r.Name == requiredReagent))
             {
-               if (!reagent.DecreaseAvailableQuantity()) throw new ReagentUnavailableException("Insufficient quantity available");
-               else return true;
-            } 
+                if (!reagent.DecreaseAvailableQuantity()) throw new ReagentUnavailableException("Insufficient quantity available");
+                else return true;
+            }
         }
         return true;
     }
 
-
+    public List<Prenotation> GetUserHistory(string user)
+    {
+        if (_prenotations.ContainsKey(user))
+        {
+            return _prenotations[user];
+        }
+        else throw new PrenotationUnavailableException($"there is no reservation for the name {user}\n");
+    }
 
     public List<Reagent> GetReagentWithMostAvailability()
     {
-        
+
         var reagents = this._reagents.OrderByDescending(reagent => reagent.QuantityAvailable).ToList();
         return reagents;
     }

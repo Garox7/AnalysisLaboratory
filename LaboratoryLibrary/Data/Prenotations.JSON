@@ -1,0 +1,14 @@
+{
+  "frfr": [
+    {
+      "_analyses": {
+        "_requiredReagents": [
+          "reagente9",
+          "reagente7",
+          "reagente6"
+        ],
+        "Name": "emocromo"
+      }
+    }
+  ]
+}

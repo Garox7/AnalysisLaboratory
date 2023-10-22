@@ -1,30 +1,18 @@
 using LaboratoryLibrary.Classes;
+using Newtonsoft.Json;
 
-public class Prenotation {
-    private string _username;
+public class Prenotation
+{
+    [JsonProperty]
     private Analysis _analyses;
-    public bool confirmed {get; private set;}
 
-    public Prenotation (string username, Analysis analysis)
+    public Prenotation (Analysis analysis)
     {
-        _username = username;
         _analyses = analysis;
-    }
-
-    public bool ConfimPrenotation()
-    {
-        if (!confirmed)
-        {
-            confirmed = true;
-            return true;
-        }
-
-        return false;
-
     }
 
     public override string ToString()
     {
-        return "";
+        return $"\n - {_analyses.Name.ToUpper()}\n";
     }
 }
