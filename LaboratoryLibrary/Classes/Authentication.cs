@@ -8,9 +8,10 @@ public enum UserAuthenticationResult
     Admin,
     User,
     InvalidCredentials,
+    Exit,
 }
 
-public class AutenticationManager:IAuthenticator
+public class AutenticationManager : IAuthenticator
 {
     public UserAuthenticationResult Autenticate (string username, string password)
     {

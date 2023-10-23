@@ -20,5 +20,17 @@
         "Name": "emocromo"
       }
     }
+  ],
+  "dede": [
+    {
+      "_analyses": {
+        "_requiredReagents": [
+          "reagente9",
+          "reagente8",
+          "reagente5"
+        ],
+        "Name": "cholesterol"
+      }
+    }
   ]
 }
