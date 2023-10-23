@@ -4,14 +4,14 @@ class Program
 {
     static int Main()
     {
-        Console.WriteLine("Welcome To Laboratory");
-        Console.WriteLine("Any key to Login");
-        Console.WriteLine("1. Exit");
-
-        if (Console.ReadLine() == "1") return 1;
     
         do
         {    
+            Console.WriteLine("Welcome To Laboratory");
+            Console.WriteLine("Any key to Login");
+            Console.WriteLine("1. Exit");
+            if (Console.ReadLine() == "1") return 1;
+
             Console.Write("Enter a username: ");
             string username = Console.ReadLine().Trim();
 
@@ -48,6 +48,6 @@ class Program
     
     static void StartConsoleAppUser()
     {
-        Process.Start(@"C:\Users\Huawei\OneDrive\Desktop\esercizi\Martina\AnalysisLaboratory\UserApp\bin\Debug\net7.0\UserApp.exe");
+        Process.Start("/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/UserApp/bin/Debug/net7.0/UserApp");
     }
 }
