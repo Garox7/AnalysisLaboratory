@@ -1,31 +1,31 @@
 [
   {
-    "Name": "analisi_1",
-    "RequiredReagents": [
+    "Name": "emocromo",
+    "_requiredReagents": [
       "reagente9",
       "reagente7",
       "reagente6"
     ]
   },
   {
-    "Name": "analisi_2",
-    "RequiredReagents": [
+    "Name": "urinalysis",
+    "_requiredReagents": [
       "reagente4",
       "reagente7",
       "reagente6"
     ]
   },
   {
-    "Name": "analisi_3",
-    "RequiredReagents": [
+    "Name": "glycemia",
+    "_requiredReagents": [
       "reagente3",
       "reagente2",
       "reagente1"
     ]
   },
   {
-    "Name": "analisi_4",
-    "RequiredReagents": [
+    "Name": "cholesterol",
+    "_requiredReagents": [
       "reagente9",
       "reagente8",
       "reagente5"

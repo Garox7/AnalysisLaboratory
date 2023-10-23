@@ -1,62 +1,85 @@
-﻿using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
+using LaboratoryLibrary.Exceptions;
 
 namespace LaboratoryLibrary.Classes;
 
 public class Laboratory
 {
-    public static List<Analysis> Analysis = new();
+    public List<Analysis>? Analysis { get; private set; }
+    private List<Reagent>? _reagents;
+    public Dictionary<string, List<Prenotation>>? _prenotations { get; private set; } = new Dictionary<string, List<Prenotation>>();
 
-    public static List<Reagent> Reagents = new();
-    public Laboratory() {
+    public void SetAnalyses(in List<Analysis> analyses)
+    {
+        Analysis = analyses;
     }
 
-    // public void LoadAnalysesFromFile(string filePath)
-    // {
-    //     // Implementa il caricamento delle analisi dal file ANALISI.DAT
-    //     // Aggiungi analisi e reagenti alla lista analyses e reagents
-    // }
-
-    // public void LoadReagentsFromFile(string filePath)
-    // {
-    //     // Implementa il caricamento dei reagenti dal file MAGAZZINO.DAT
-    //     // Aggiorna le quantità disponibili dei reagenti esistenti e aggiungi nuovi reagenti se necessario
-    // }
-
-    // // public static bool checkIfReagentIsAvaiable(string reagentName)
-    // // {
-    // //     if (Reagents.Any(reagent => reagent.Name == reagentName))
-    // //     {
-    // //         return true;
-    // //     } 
-    // //     return false;
-    // // }
-
-    // public void getListAnalysisAndReagents()
-    // {
-    //     // Ottengo la lista delle analisi e dei loro reagenti richiesti.
-    //     // oppure stampo la lisa delle analisi e dei reagenti separatamente?
-    // }      
-    // public void AnalysisPrenotation(string choice) 
-    // {
-    //     foreach( string reagentName in analysis.RequiredReagents){
-    //         Reagent reagent = Reagents.FirstOrDefault(r => r.Name == reagentName);
-    //         if ( reagent == null|| reagent.QuantityInStock==0){
-    //             Console.Write("Sorry, is not possible to book at the moment");
-    //         }
-    //         Reservation reservation = new Reservation();
-    //         if (reservation == null){
-    //         }
-        // Tale funzione deve controllare la disponibilità dei reagenti richiesti per effettuare
-        // l'esame e aggiornare l'elenco. Nel caso dei reagenti non disponibili informa l'utente e non permette la prenotazione
-        
+    public void SetReagents(in List<Reagent> reagents)
+    {
+        _reagents = reagents;
     }
 
+    public void SetPrenotations(in Dictionary<string, List<Prenotation>> prenotations)
+    {
+        _prenotations = prenotations;
+    }
 
-    // confronto reagenti analisi con reagenti in magazzino 
+    public (List<Analysis>? analysesList, List<Reagent>? reagentsList) GetAnalysesAndReagent()
+    {
+        return (Analysis, _reagents);
+    }
 
-    // public Reagent GetReagentWithMostAvailability()
-    // {
-    //     // Restituisci il reagente con la maggiore disponibilità
-    // }
+    /* Effettua la prenotazione sia lato Admin che Lato User:
+    ** Torna vero se a sua volta i reagenti richiesti per effettuare l'analisi disponibili
+    ** tramite "DecreaseReagentsQuantityForAnalysis".
+    */
+    public bool CreatePrenotation(string username, in Analysis analysis)
+    {
+        if (!_prenotations.ContainsKey(username))
+        {
+            _prenotations[username] = new List<Prenotation>();
+        }
+
+        if (DecreaseReagentsQuantityForAnalysis(analysis))
+        {
+            var prenotation = new Prenotation(analysis);
+            _prenotations[username].Add(prenotation);
+            return true;
+        }
+        else throw new ReagentUnavailableException("The required reagents are not available for analysis.");
+    }
+
+    // questo metodo si occupa di decrementare all'interno del magazzino 
+    // le quantità dei reagenti richiesti di un determinato tipo di analisi
+    // ritorna vero se a sua volta il metodo DecreaseAvailableQuantity trova pezzi disponibili
+    // o per quel determinato reagente.
+    private bool DecreaseReagentsQuantityForAnalysis(Analysis analysis)
+    {
+        List<string> requiredReagents = analysis.GetRequiredReagent();
+
+        foreach (var requiredReagent in requiredReagents)
+        {
+            foreach (var reagent in _reagents.FindAll(r => r.Name == requiredReagent))
+            {
+                if (!reagent.DecreaseAvailableQuantity()) throw new ReagentUnavailableException("Insufficient quantity available");
+                else return true;
+            }
+        }
+        return true;
+    }
+
+    public List<Prenotation> GetUserHistory(string user)
+    {
+        if (_prenotations.ContainsKey(user))
+        {
+            return _prenotations[user];
+        }
+        else throw new PrenotationUnavailableException($"there is no reservation for the name {user}\n");
+    }
+
+    public List<Reagent> GetReagentWithMostAvailability()
+    {
+
+        var reagents = this._reagents.OrderByDescending(reagent => reagent.QuantityAvailable).ToList();
+        return reagents;
+    }
+}

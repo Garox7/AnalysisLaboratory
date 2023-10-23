@@ -1,4 +1,4 @@
-﻿using LaboratoryLibrary.Classes;
+using LaboratoryLibrary.Classes;
 public class UserInterface
 //si deve provare con il codice completo altrimenti non posso vedere se funziona
 {

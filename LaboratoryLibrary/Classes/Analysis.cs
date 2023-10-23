@@ -1,46 +1,57 @@
+using Newtonsoft.Json;
+
 namespace LaboratoryLibrary.Classes;
 
 public class Analysis
 {
     public string Name {get;}
-    public List<string> RequiredReagents {get; }
+
+    [JsonProperty]
+    private List<string> _requiredReagents = new();
 
     public Analysis(string name)
     {
         Name = name;
-        RequiredReagents = new List<string>();
-        
-        if (reagentName != null)
-        {
-            foreach (string reagent in reagentName)
-            {
-                AddReagent(reagent);
-            }
-        }
-        else
-        {
-            Console.WriteLine($"In {Name}, la lista di reagenti è nulla.");
-        }
     }
 
-    private void AddReagent(string reagentName)
+    public bool AddReagent(List<Reagent> reagents)
     {
-        if (Laboratory.Reagents.Any(reagent => reagent.Name == reagentName))
+        bool reagentExist = true;
+
+        foreach (var reagentName in _requiredReagents.ToList())
         {
-            RequiredReagents.Add(reagentName);
+            Reagent? reagent = reagents
+                .FirstOrDefault(reagent => reagent.Name == reagentName && reagent.QuantityAvailable >= 1);
+
+            if (reagent != null)
+            {
+                _requiredReagents.Add(reagentName);
+                reagent.DecreaseAvailableQuantity();
+            } 
+            else
+            {
+                _requiredReagents.Remove(reagentName);
+                reagentExist = false;
+            }
         }
+        return reagentExist;
+    }
+
+    public List<string> GetRequiredReagent()
+    {
+        return _requiredReagents;
     }
 
     public override string ToString()
     {
-        string reagentString = string.Empty;
-        foreach (var reagent in RequiredReagents)
+        string reagentList = "";
+        foreach (var reagent in _requiredReagents)
         {
-            reagentString += $"{reagent}\n";
+            reagentList += $"{reagent}\n";
         }
 
         return 
-            $"{Name}\n" +
-            $"{reagentString}";
+            $"---- {Name.ToUpper()} ----\n"  +
+            $"{reagentList}";
     }
 }

@@ -8,21 +8,11 @@ class Program
 {
     static void Main()
     {
-        // JsonFileManager jsonFile = new();
-        // // program.Inizialization();
+        // Laboratory lab = new();
+        // JsonFileManager jsonFile = new(lab);
 
-
-        // jsonFile.ReadAnalysisJsonFile();
-        // // foreach (var reagent in Laboratory.Reagents)
-        // {
-        //     Console.WriteLine(reagent.ToString());
-        // }
-
-        // foreach (var analysis in Laboratory.Analysis)
-        // {
-        //     Console.WriteLine(analysis.ToString());
-        // }
-
+        AdminInterface adminInterface = new();
+        adminInterface.Admin();
 
         Console.WriteLine("Welcome To Laboratory");
         Console.WriteLine("Enter a username: ");
@@ -36,7 +26,7 @@ class Program
         switch (result)
         {
             case UserAuthenticationResult.Admin:
-                AdminInterface.Admin();
+                adminInterface.Admin();
                 break;
             case UserAuthenticationResult.User:
                 StartConsoleAppUser();
@@ -99,3 +89,13 @@ class Program
     // }
 }
 
+/*
+TODO:
+1. Classe prenotazione, V
+2. Creare Dictonary,
+3. Provare a serializzare e deserializzare i dati,
+4. Effettuare prenotazione sia lato Admin che User,
+5. Lato Admin ottenere per ogni Analisi gli utenti prenotati,
+6. Lato User ottenere per lo User corrente lo storico degli esami effettuati.
+7. 
+*/
