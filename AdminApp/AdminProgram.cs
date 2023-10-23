@@ -11,8 +11,7 @@ class Program
         // Laboratory lab = new();
         // JsonFileManager jsonFile = new(lab);
 
-        AdminInterface adminInterface = new();
-        adminInterface.Admin();
+
 
         Console.WriteLine("Welcome To Laboratory");
         Console.WriteLine("Enter a username: ");
@@ -26,6 +25,7 @@ class Program
         switch (result)
         {
             case UserAuthenticationResult.Admin:
+                AdminInterface adminInterface = new();
                 adminInterface.Admin();
                 break;
             case UserAuthenticationResult.User:
@@ -34,6 +34,7 @@ class Program
             case UserAuthenticationResult.InvalidCredentials:
                 Console.WriteLine("Invalid credentials. Please try again");
                 break;
+           
         }
     }
     static void StartConsoleAppUser()
@@ -99,3 +100,4 @@ TODO:
 6. Lato User ottenere per lo User corrente lo storico degli esami effettuati.
 7. 
 */
+

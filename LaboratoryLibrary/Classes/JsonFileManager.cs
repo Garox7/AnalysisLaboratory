@@ -6,9 +6,9 @@ public delegate string JsonWriter<T>(T data, Formatting indent);
 public class JsonFileManager
 {
     private Laboratory _lab;
-    private readonly string filePathReagents = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Reagent.JSON";
-    private readonly string filePathAnalysis = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Analysis.JSON";
-    public readonly string filePathPrenotations = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Prenotations.JSON";
+    private readonly string filePathReagents = @"C:\Users\Huawei\OneDrive\Desktop\esercizi\Martina\AnalysisLaboratory\LaboratoryLibrary\Data\Reaget.JSON";
+    private readonly string filePathAnalysis = @"C:\Users\Huawei\OneDrive\Desktop\esercizi\Martina\AnalysisLaboratory\LaboratoryLibrary\Data\Analysis.JSON";
+    public readonly string filePathPrenotations = @"C:\Users\Huawei\OneDrive\Desktop\esercizi\Martina\AnalysisLaboratory\LaboratoryLibrary\Data\Prenotations.JSON";
 
     public JsonFileManager(Laboratory lab) {
         _lab = lab;
