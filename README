@@ -1,8 +1,24 @@
-To-do:
-- creare prenotazione lato admin e lato user.
-- Permettere la prenotazione lato Admin
-- Creare il file archivio (?)
-- Creare l’interfaccia lato User
-- Permettere la prenotazione lato user, ho pensato ad una nuova struttura dati magari 
-che tenga il nome di chi ha effettuato la prenotazione e il tipo di analisi prenotato 
-in modo che l’utente possa avere anche uno storico delle prenotazioni.
+Project Garozzo - Bentivegna:
+
+Introduction:
+The aim of the project is to manage the organitation of an analysis laboratory
+
+Work suddivision:
+We worked together on the creation of the architecture of the project and the manage of Json File.
+Garozzo -> Method of the LaboratoryLibrary and Laboratory Test;
+Bentivegna and Garozzo -> Prenotation, login user and admin.
+
+Work:
+We decided to split the work in two consoleApp, AdminApp and UserApp in which via login the user can select certain action. 
+We, also, created a Laboratory Library that contains alla the logic of the program, aka, classes and methods.
+In the class Laboratory, we have two lists that are a representation of the files Json of Analysis and Reagent (Reagent represent MAGAZZINO).
+Analysis contain the name of the analysi and the reagent required to do the analysis. 
+Reagent are the collection of reagents in stock in the laboratory and permit to understand if the reagent is avaiable or not to perform the analysis.
+We, also, decided to not create a list called ARCHIVIO, because we created a method called DecreaseAvailableQuantity that permit to decrease the quantiti of aregent if used to perform an analysis.
+So the List Reagent is always updated each time an analysis are booked.
+When the program is closed, this list update the file Json called Reagent with the new quantity of the reagent.
+We also decided to create a login, because of the different action that are performed from the user. The client can only book an alaysis without seeing the reagent avaiable, and see the cronology of of reservations made.
+The admin, instead, can book an analysis visualizing the reagent needed, can see the reagents based on the greater quantity avaiable and see the cronology of the analysis booked. 
+
+
+
