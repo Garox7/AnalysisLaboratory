@@ -1,21 +1,30 @@
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
+<<<<<<< HEAD
 using System.IO;
 namespace LaboratoryLibrary.Classes;
 // dotnet add PROGETTO DOVE VA USATO reference PROGETTO DA USARE
+=======
+namespace LaboratoryLibrary.Classes;
+
+public delegate string JsonWriter<T>(T data, Formatting indent);
+
+>>>>>>> ddac13ac3064b4a9954dc0681d4c8aac23ec94ae
 public class JsonFileManager
 {
-    // definiamo un delegate per la lettura di un file JSON
-    public delegate T JsonReader <T>(string filePath);
+    private Laboratory _lab;
+    private readonly string filePathReagents = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Reagent.JSON";
+    private readonly string filePathAnalysis = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Analysis.JSON";
+    public readonly string filePathPrenotations = "/Users/giuseppegarozzo/Desktop/FMF/AnalysisLaboratory/LaboratoryLibrary/Data/Prenotations.JSON";
 
-    // definiamo un delegate per la scrittuta di un file JSON
-    public delegate string JsonWriter<T>(T data);
-    // Metodo per generivo per leggere un file JSON
+    public JsonFileManager(Laboratory lab) {
+        _lab = lab;
+    }
 
-    public T ReadJsonFile<T>(string filePath, JsonReader<T> jsonReader)
+    public async void ReadAnalysesJsonFile()
     {
-        if(File.Exists(filePath))
+        using (StreamReader reader = new StreamReader(filePathAnalysis))
         {
+<<<<<<< HEAD
             File.SetAttributes(filePath, File.GetAttributes(filePath) | FileAttributes.ReadOnly);
             string jsonData = File.ReadAllText(filePath);
             return jsonReader(jsonData);
@@ -23,15 +32,37 @@ public class JsonFileManager
         else
         {
             throw new FileNotFoundException($"File not foud: {filePath}");
+=======
+            string json = await reader.ReadToEndAsync();
+            var analysis = JsonConvert.DeserializeObject<List<Analysis>>(json);
+            _lab.SetAnalyses(analysis);
+>>>>>>> ddac13ac3064b4a9954dc0681d4c8aac23ec94ae
         }
     }
-    //Metodo per scrivere un file JSON
+
+    public async void ReadReagentJsonFile()
+    {
+        using (StreamReader reader = new StreamReader(filePathReagents))
+        {
+            string json = await reader.ReadToEndAsync();
+            var reagents = JsonConvert.DeserializeObject<List<Reagent>>(json);
+            _lab.SetReagents(reagents);
+        }
+    }
+
+     public async void ReadPrenotationJsonFile()
+    {
+        using (StreamReader reader = new StreamReader(filePathPrenotations))
+        {
+            string json = await reader.ReadToEndAsync();
+            var prenotations = JsonConvert.DeserializeObject<Dictionary<string, List<Prenotation>>>(json);
+            _lab.SetPrenotations(prenotations);
+        }
+    }
+    
     public void WriteJsonFile<T>(string filePath, T data, JsonWriter<T> jsonWriter)
     {
-       string jsonData = jsonWriter(data);
+       string jsonData = jsonWriter(data, Formatting.Indented);
        File.WriteAllText(filePath, jsonData);
-
     }
 }
-
-//controllare se funzionadotenet 

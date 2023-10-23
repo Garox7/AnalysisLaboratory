@@ -1,0 +1,8 @@
+To-do:
+- creare prenotazione lato admin e lato user.
+- Permettere la prenotazione lato Admin
+- Creare il file archivio (?)
+- Creare l’interfaccia lato User
+- Permettere la prenotazione lato user, ho pensato ad una nuova struttura dati magari 
+che tenga il nome di chi ha effettuato la prenotazione e il tipo di analisi prenotato 
+in modo che l’utente possa avere anche uno storico delle prenotazioni.

@@ -1,0 +1,52 @@
+[
+  {
+    "QuantityAvailable": 14,
+    "QuantityInStock": 20,
+    "Name": "reagente1"
+  },
+  {
+    "QuantityAvailable": 11,
+    "QuantityInStock": 20,
+    "Name": "reagente2"
+  },
+  {
+    "QuantityAvailable": 8,
+    "QuantityInStock": 20,
+    "Name": "reagente3"
+  },
+  {
+    "QuantityAvailable": 3,
+    "QuantityInStock": 20,
+    "Name": "reagente4"
+  },
+  {
+    "QuantityAvailable": 19,
+    "QuantityInStock": 20,
+    "Name": "reagente5"
+  },
+  {
+    "QuantityAvailable": 17,
+    "QuantityInStock": 20,
+    "Name": "reagente6"
+  },
+  {
+    "QuantityAvailable": 5,
+    "QuantityInStock": 20,
+    "Name": "reagente7"
+  },
+  {
+    "QuantityAvailable": 3,
+    "QuantityInStock": 20,
+    "Name": "reagente8"
+  },
+  {
+    "QuantityAvailable": 1,
+    "QuantityInStock": 20,
+    "Name": "reagente9"
+  },
+  {
+    "QuantityAvailable": 13,
+    "QuantityInStock": 20,
+    "Name": "reagente10"
+  }
+]
