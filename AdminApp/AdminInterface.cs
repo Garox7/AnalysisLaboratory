@@ -48,6 +48,7 @@ public class AdminInterface
                         GetHistoryFromUser();
                         break;
                     case "5":
+                        
                         return;
                     default:
                         Console.WriteLine("Invalid choise");
